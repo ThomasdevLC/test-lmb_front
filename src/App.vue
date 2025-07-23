@@ -6,7 +6,7 @@
   <header>
 <!--    <NavBar />-->
   </header>
-  <main class="relative min-h-screen text-primary px-40 py-20">
+  <main class="relative min-h-screen text-text-color px-40 py-20">
     <RouterView />
   </main>
 </template>
