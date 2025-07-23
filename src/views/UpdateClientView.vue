@@ -1,18 +1,81 @@
 <template>
-  <div class="p-6 max-w-md mx-auto space-y-4">
-    <h1 class="text-xl font-bold">Mettre à jour un client</h1>
+  <div class="p-6 max-w-3xl mx-auto space-y-4">
+    <div v-if="form" class="px-1 py-2 border border-border flex justify-between items-center">
+      <p class="text-2xl">{{ form.nom }}</p>
+    </div>
 
-    <div v-if="form">
-      <input v-model="form.nom" placeholder="Nom" class="input w-full p-2 border rounded" />
-      <input v-model="form.tel" placeholder="Téléphone" class="input w-full p-2 border rounded" />
-      <input v-model="form.email" placeholder="Email" class="input w-full p-2 border rounded" />
-      <input v-model="form.adresse" placeholder="Adresse" class="input w-full p-2 border rounded" />
-      <input v-model="form.code_postal" placeholder="Code postal" class="input w-full p-2 border rounded" />
-      <input v-model="form.ville" placeholder="Ville" class="input w-full p-2 border rounded" />
+    <div v-if="form" class="px-1 py-4 border border-border">
+      <p class="text-xl font-semibold border-b pb-2 mb-4">Édition</p>
 
-      <button @click="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-        Mettre à jour
-      </button>
+      <div class="flex justify-center">
+        <table class="table-auto">
+          <tbody>
+            <tr>
+              <td class="py-1 pr-4 font-semibold text-right border-r border-gray-300">Nom :</td>
+              <td class="py-1 pl-4">
+                <input v-model="form.nom" placeholder="Nom" class="w-full p-2 border rounded" />
+              </td>
+            </tr>
+            <tr>
+              <td class="py-1 pr-4 font-semibold text-right border-r border-gray-300">
+                Téléphone :
+              </td>
+              <td class="py-1 pl-4">
+                <input
+                  v-model="form.tel"
+                  placeholder="Téléphone"
+                  class="w-full p-2 border rounded"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="py-1 pr-4 font-semibold text-right border-r border-gray-300">Email :</td>
+              <td class="py-1 pl-4">
+                <input v-model="form.email" placeholder="Email" class="w-full p-2 border rounded" />
+              </td>
+            </tr>
+            <tr>
+              <td class="py-1 pr-4 font-semibold text-right border-r border-gray-300">Adresse :</td>
+              <td class="py-1 pl-4">
+                <input
+                  v-model="form.adresse"
+                  placeholder="Adresse"
+                  class="w-full p-2 border rounded"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="py-1 pr-4 font-semibold text-right border-r border-gray-300">
+                Code postal :
+              </td>
+              <td class="py-1 pl-4">
+                <input
+                  v-model="form.code_postal"
+                  placeholder="Code postal"
+                  class="w-full p-2 border rounded"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="py-1 pr-4 font-semibold text-right border-r border-gray-300">Ville :</td>
+              <td class="py-1 pl-4">
+                <input v-model="form.ville" placeholder="Ville" class="w-full p-2 border rounded" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="flex justify-end mt-4">
+        <div class="flex gap-2">
+        <button @click="cancel" class="cursor-pointer  text-text-color px-4 py-2 rounded border bordr-border">
+          Annuler
+        </button>
+        <button @click="submit" class="cursor-pointer bg-validate text-white px-4 py-2 rounded">
+          Enregistrer
+        </button>
+        </div>
+      </div>
+
 
       <p v-if="message" class="text-green-600 mt-2">{{ message }}</p>
     </div>
@@ -64,22 +127,18 @@ async function submit() {
 
   try {
     await updateClient(clientId, form.value)
-    message.value = 'informations mise à jour'
+    message.value = 'Informations mises à jour'
 
     setTimeout(() => {
-      router.push({ name: 'home', })
+      router.push({ name: 'home' })
     }, 1500)
   } catch (error) {
     console.error('Erreur lors de la mise à jour :', error)
     message.value = 'Erreur lors de la mise à jour du client.'
   }
-}
 
+}
+  function cancel() {
+    router.push({ name: 'home' })
+  }
 </script>
-
-<style scoped>
-.input {
-  display: block;
-  margin-bottom: 1rem;
-}
-</style>
