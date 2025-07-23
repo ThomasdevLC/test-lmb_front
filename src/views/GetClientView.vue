@@ -1,13 +1,12 @@
 <template>
   <div class="p-6">
-    <h1 class="text-2xl font-bold mb-4">Détail du client</h1>
+    <h1 class="text-2xl font-bold mb-4">Détails du client</h1>
 
     <div v-if="client">
-      <p><strong>ID :</strong> {{ client.id }}</p>
-      <p><strong>Nom :</strong> {{ client.nom }}</p>
-      <p><strong>Adresse :</strong> {{ client.adresse }}</p>
-      <p><strong>Ville :</strong> {{ client.ville }}</p>
+      <p><strong>Nom complet :</strong> {{ client.nom }}</p>
       <p><strong>Téléphone :</strong> {{ client.tel }}</p>
+      <p><strong>Email :</strong> {{ client.email }}</p>
+      <p><strong>Adresse :</strong> {{ client.adresse }}</p>
     </div>
 
     <div v-else>
@@ -18,10 +17,12 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { getClientById } from '@/services/client/clientService'
 import type { Client } from '@/models/client'
 
-const clientId = 'C-00005'
+const route = useRoute()
+const clientId = route.params.id as string
 
 const client = ref<Client | null>(null)
 
@@ -30,7 +31,7 @@ onMounted(async () => {
     const response = await getClientById(clientId)
     client.value = response.datas
   } catch (error) {
-    console.error('Erreur lors du chargement du client :', error)
+    console.error('Error loading client:', error)
   }
 })
 </script>
