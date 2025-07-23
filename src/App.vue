@@ -1,12 +1,12 @@
-<script setup lang="ts">
-// import NavBar from '@/components/NavBar.vue'
-</script>
-
 <template>
   <header>
-<!--    <NavBar />-->
+    <HeaderComponent />
   </header>
-  <main class="relative min-h-screen text-text-color px-40 py-20">
+  <main>
     <RouterView />
   </main>
 </template>
+
+<script setup lang="ts">
+import HeaderComponent from '@/components/HeaderComponent.vue'
+</script>
