@@ -10,18 +10,39 @@
       @input="fetchClients"
     />
 
-    <ul class="space-y-2">
-      <li
-        v-for="client in clients"
-        :key="client.id"
-        class="bg-white p-4 rounded shadow-sm border"
-      >
-        <p class="text-lg font-semibold">{{ client.nom }}</p>
-        <p class="text-sm text-gray-600">{{ client.ville }}</p>
-        <p class="text-sm text-gray-500">{{ client.adresse }}</p>
-        <p class="text-sm text-gray-500">{{ client.tel }}</p>
-      </li>
-    </ul>
+    <div class="overflow-x-auto">
+      <table class="w-full table-auto border-collapse mt-4">
+        <thead>
+        <tr class="bg-gray-100">
+          <th class="border p-2 text-left">Nom</th>
+          <th class="border p-2 text-left">Adresse</th>
+          <th class="border p-2 text-left">Ville</th>
+          <th class="border p-2 text-left">Téléphone</th>
+          <th class="border p-2 text-left">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr
+          v-for="client in clients"
+          :key="client.id"
+          class="bg-white hover:bg-gray-50"
+        >
+          <td class="border p-2">{{ client.nom }}</td>
+          <td class="border p-2">{{ client.adresse }}</td>
+          <td class="border p-2">{{ client.ville }}</td>
+          <td class="border p-2">{{ client.tel }}</td>
+          <td class="border p-2">
+            <button
+              class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+              @click="voirClient(client)"
+            >
+              Voir
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -44,6 +65,12 @@ async function fetchClients() {
     console.error('Erreur chargement clients:', error)
     clients.value = []
   }
+}
+
+// Exemple d'action pour le bouton "Voir"
+function voirClient(client: Client) {
+  console.log('Client sélectionné :', client)
+  // vous pouvez aussi utiliser une navigation ou un modal ici
 }
 
 fetchClients()
