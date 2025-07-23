@@ -16,14 +16,11 @@ const router = createRouter({
       name: 'client-details',
       component: GetClientView,
     },
-
     {
-      path: '/edit',
+      path: '/client/:id/edit',
       name: 'edit-client',
       component: UpdateClientView,
-
     },
-
   ],
 })
 
