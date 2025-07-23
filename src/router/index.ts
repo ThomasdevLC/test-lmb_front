@@ -12,11 +12,11 @@ const router = createRouter({
       component: SearchClientsView,
     },
     {
-      path: '/about',
-      name: 'about',
+      path: '/client/:id',
+      name: 'client-details',
       component: GetClientView,
+    }
 
-    },
     {
       path: '/edit',
       name: 'edit-client',
