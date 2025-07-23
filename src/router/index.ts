@@ -15,7 +15,7 @@ const router = createRouter({
       path: '/client/:id',
       name: 'client-details',
       component: GetClientView,
-    }
+    },
 
     {
       path: '/edit',

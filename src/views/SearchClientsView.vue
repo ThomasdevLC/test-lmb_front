@@ -34,7 +34,7 @@
           <td class="border p-2">
             <button
               class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
-              @click="voirClient(client)"
+              @click="seeClient(client)"
             >
               Voir
             </button>
@@ -49,10 +49,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { getClients } from '@/services/client/clientService'
+import { useRouter } from 'vue-router'
 import type { Client } from '@/models/client'
 
+const router = useRouter()
 const clients = ref<Client[]>([])
 const searchTerm = ref('')
+
 
 async function fetchClients() {
   try {
@@ -67,10 +70,8 @@ async function fetchClients() {
   }
 }
 
-// Exemple d'action pour le bouton "Voir"
-function voirClient(client: Client) {
-  console.log('Client sélectionné :', client)
-  // vous pouvez aussi utiliser une navigation ou un modal ici
+function seeClient(client: Client) {
+  router.push({ name: 'client-details', params: { id: client.id } })
 }
 
 fetchClients()
