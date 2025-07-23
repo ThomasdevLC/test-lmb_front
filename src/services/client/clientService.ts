@@ -7,9 +7,12 @@ export async function getClients(filters: ClientFilters = {}) {
 }
 
 export async function getClientById(id: string) {
-  const { data } = await http.get('/get-client.php', { params: { id } })
+  const { data } = await http.get('/get-client-by-id.php', {
+    params: { id }
+  })
   return data as { datas: Client }
 }
+
 
 export async function updateClient(id: string, updateData: ClientUpdate) {
   const { data } = await http.put(`/update-client.php?id=${id}`, updateData)
